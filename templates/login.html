@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="{% static 'css/fonts.css'  %}" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --secondary: #2c3e50;
+            --danger: #e74c3c;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --border-radius: 10px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .login-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 560px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+
+        /* Message Styling */
+        .message-container {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .message {
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .success {
+            background: var(--success);
+            color: white;
+        }
+
+        .error {
+            background: var(--danger);
+            color: white;
+        }
+
+        .warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--secondary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e1e5eb;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+            outline: none;
+        }
+
+        .password-toggle {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .password-toggle input {
+            margin-right: 0.5rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.85rem;
+            width: 100%;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn:hover {
+            background: #3a7bc8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+
+        <!-- Display messages dynamically -->
+        <div class="message-container">
+            {% for message in messages %}
+                <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <form method="POST" id="login-form" role="form" enctype="multipart/form-data" autocomplete="off">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password" required>
+                <div class="password-toggle">
+                    <input type="checkbox" id="show-password">
+                    <label for="show-password" class="toggle-label">Show password</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // Show/hide password functionality
+        document.getElementById('show-password').addEventListener('change', function() {
+            const passwordField = document.getElementById('password');
+            passwordField.type = this.checked ? 'text' : 'password';
+        });
+
+        // Auto-hide messages after 5 seconds
+        setTimeout(() => {
+            document.querySelectorAll('.message').forEach(message => {
+                message.style.opacity = '0';
+                setTimeout(() => message.remove(), 500); // Removes element after fade-out
+            });
+        }, 5000);
+    </script>
+</body>
+</html>
