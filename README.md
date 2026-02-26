@@ -1,110 +1,166 @@
-# lorawan_gps_tracking
+<p align="center">
+  <img src="static/logo/logo2222.jpg" alt="Vajr Signals Logo" width="200"/>
+</p>
 
-A full-stack Django application for real-time monitoring of GPS-enabled devices. This system parses device telemetry from TeraTerm logs and visualizes movements on an interactive map.
+<h1 align="center">Vajr Signals: LoRaWAN GPS Tracking</h1>
 
-## � Visual Overview
+<p align="center">
+  <strong>A high-performance real-time GPS monitoring system for LoRaWAN-enabled devices.</strong>
+</p>
 
-### Main Dashboard
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python Version"/>
+  <img src="https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django Version"/>
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License"/>
+  <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge" alt="Status"/>
+</p>
+
+---
+
+## 📖 Overview
+
+Vajr Signals is a comprehensive full-stack solution designed for field monitoring and safety tracking. The system seamlessly integrates with LoRaWAN gateways, parsing TeraTerm telemetry logs to provide a live, interactive map visualization of device movements and emergency SOS alerts.
+
+---
+
+## 📍 Table of Contents
+
+- [📸 Visual Overview](#-visual-overview)
+- [🚀 Key Features](#-key-features)
+- [🛠️ Tech Stack](#-tech-stack)
+- [⚙️ Getting Started](#-getting-started)
+- [🛰️ How it Works](#-how-it-works)
+- [📂 Structure](#-structure)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
+
+---
+
+## 📸 Visual Overview
+
+### 🗺️ Main Dashboard
+> Experience real-time precision tracking on a dynamic map.
+
 ![Dashboard showing real-time tracking](static/screenshots/dashboard.png)
 
-### User Authentication
-| Login (Empty) | Login (Admin) |
+### 🔐 User Authentication
+> Secure, role-based access for device management.
+
+| Login Interface | Active Session |
 | :---: | :---: |
 | ![Login Page Empty](static/screenshots/login_empty.png) | ![Login Page Filled](static/screenshots/login.png) |
 
-### Device Management & Status
-| Device Configuration | API Data Fetching |
+### ⚙️ Device Management & Status
+> Configure device parameters and monitor live API data streams.
+
+| Configuration | Live Data Feed |
 | :---: | :---: |
 | ![Device Configuration Modal](static/screenshots/device_config.png) | ![Live API Data Fetching](static/screenshots/api_fetch.png) |
 
-## �🚀 Features
+---
 
-- **Real-time Map Visualization**: Track multiple devices on an interactive map interface.
-- **Smart Log Ingestion**: Automatically parses TeraTerm (`.log`) files to sync GPS coordinates with the database.
-- **Device Management**:
-  - Toggle device visibility (Active/Inactive).
-  - Assign custom colors for each device marker.
-- **Emergency SOS Alarms**:
-  - Real-time SOS packet detection.
-  - Visual and audio alerts (SOS siren) on the dashboard.
-  - Ability to stop/clear alarms.
-- **Custom User Authentication**: Secure email-based login system with personalized settings.
-- **Filtering**: View historical paths based on specific dates and custom time intervals (e.g., 2s, 5m).
+## 🚀 Key Features
 
-## 🛠️ Technology Stack
+- ✅ **Real-time Visualization**: Interactive map with multi-device tracking.
+- ✅ **Smart Ingestion**: Automatic parsing of TeraTerm `.log` files for seamless data sync.
+- ✅ **Advanced SOS System**: Instant visual & audio alerts for emergency packets.
+- ✅ **Customizable UI**: Set unique marker colors and visibility states for each device.
+- ✅ **History & Filtering**: Detailed path reconstruction with customizable time intervals.
+- ✅ **Secure Auth**: Robust email-based authentication system.
 
-- **Backend**: Python 3.10+, Django 5.1.6, Django REST Framework.
-- **Frontend**: HTML5, Vanilla JavaScript, CSS3.
-- **Database**: SQLite (default) / MySQL support included.
-- **Additional**: Pillow (for user avatars), MySQLClient.
+---
 
-## 📋 Requirements
+## 🛠️ Tech Stack
 
-Ensure you have the following installed:
-- Python 3.10+
-- Django 5.1.6
-- MySQL (Optional, if switching from SQLite)
+| Component | Technology |
+| :--- | :--- |
+| **Backend** | Python 3.10+, Django 5.1.6, Django REST Framework |
+| **Frontend** | HTML5, Vanilla JavaScript, CSS3 |
+| **Database** | SQLite / MySQL |
+| **Mapping** | Leaflet.js / OpenStreetMap |
+| **Assets** | Pillow (Image Processing), MySQLClient |
 
-## ⚙️ Installation
+---
 
-1. **Clone the repository**:
-   ```powershell
+## ⚙️ Getting Started
+
+### 📋 Prerequisites
+- Python 3.10 or higher
+- `pip` (Python package manager)
+- MySQL (Optional, for production environments)
+
+### 🚀 Installation Steps
+
+1. **Clone & Enter Directory**
+   ```bash
    git clone <repository-url>
-   cd GPS_Tracking
+   cd lorawan_gps_tracking
    ```
 
-2. **Set up Virtual Environment**:
-   ```powershell
+2. **Environment Setup**
+   ```bash
    python -m venv venv
+   # Windows:
    .\venv\Scripts\activate
+   # Linux/Mac:
+   source venv/bin/activate
    ```
 
-3. **Install Dependencies**:
-   ```powershell
+3. **Install Dependencies**
+   ```bash
    pip install -r requirements.txt
    ```
 
-4. **Database Migrations**:
-   ```powershell
+4. **Initialize Database**
+   ```bash
    python manage.py makemigrations
    python manage.py migrate
-   ```
-
-5. **Create Superuser** (for admin access):
-   ```powershell
    python manage.py createsuperuser
    ```
 
-## 🏃 How to Run
-
-### Development Server
-Start the server using the default Django command:
-```powershell
+### 🏃 Running the Application
+```bash
 python manage.py runserver
 ```
 
-### Production/Network Mode
-If you need to access the server over a local network (e.g., for device testing), you can run:
-```powershell
-python manage.py runserver 0.0.0.0:8000
-```
-*(Note: Ensure your firewall allows traffic on the specified port.)*
+---
 
-## 🛰️ Log Ingestion (How it Works)
+## 🛰️ How it Works (Log Ingestion)
 
-The system integrates with field devices that log their data via TeraTerm.
-1. Place your TeraTerm log files in the project root directory.
-2. **Naming Convention**: `teraterm_YYMMDD.log` (e.g., `teraterm_250225.log` for Feb 25, 2025).
-3. The `LogIngestionService` (found in `services.py`) automatically parses these files for tags like `LAT:`, `LONG:`, `DEV_ID:`, and `PCKT_ID:`.
-4. SOS packets (`PCKT_ID: SOS`) automatically trigger emergency alarms in the UI.
+1. **Log Collection**: Devices log data via TeraTerm to the project root.
+2. **Naming Pattern**: `teraterm_YYMMDD.log` (e.g., `teraterm_250225.log`).
+3. **Parsing**: `LogIngestionService` extracts `LAT`, `LONG`, `DEV_ID`, and `PCKT_ID`.
+4. **Alarms**: `PCKT_ID: SOS` automatically triggers the emergency siren and UI alerts.
+
+---
 
 ## 📂 Project Structure
 
-- `GPS_App/`: Core business logic, models, and API views.
-- `GPS_Tracking/`: Django project settings and configuration.
-- `templates/`: HTML templates (Map, Index, Login).
-- `static/`: Assets including CSS, JS, and the SOS siren audio.
-- `requirements.txt`: List of required Python packages.
+- 📁 `GPS_App/`: Core monitoring logic, models, and API endpoints.
+- 📁 `GPS_Tracking/`: System configuration and settings.
+- 📁 `templates/`: Clean, responsive HTML templates.
+- 📁 `static/`: Project assets (CSS, JS, Audio, Screenshots).
+- 📄 `requirements.txt`: Package dependencies.
 
 ---
-*Created with ❤️ for GPS Monitoring.*
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+<p align="center">
+  <i>Created with ❤️ for GPS Monitoring Excellence.</i>
+</p>
