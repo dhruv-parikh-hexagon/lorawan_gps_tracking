@@ -2,7 +2,22 @@
 
 A full-stack Django application for real-time monitoring of GPS-enabled devices. This system parses device telemetry from TeraTerm logs and visualizes movements on an interactive map.
 
-## 🚀 Features
+## � Visual Overview
+
+### Main Dashboard
+![Dashboard showing real-time tracking](static/screenshots/dashboard.png)
+
+### User Authentication
+| Login (Empty) | Login (Admin) |
+| :---: | :---: |
+| ![Login Page Empty](static/screenshots/login_empty.png) | ![Login Page Filled](static/screenshots/login.png) |
+
+### Device Management & Status
+| Device Configuration | API Data Fetching |
+| :---: | :---: |
+| ![Device Configuration Modal](static/screenshots/device_config.png) | ![Live API Data Fetching](static/screenshots/api_fetch.png) |
+
+## �🚀 Features
 
 - **Real-time Map Visualization**: Track multiple devices on an interactive map interface.
 - **Smart Log Ingestion**: Automatically parses TeraTerm (`.log`) files to sync GPS coordinates with the database.
